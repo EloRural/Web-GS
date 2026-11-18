@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Menu from './components/Menu'
 import Home from './pages/Home'
+import Dados from './pages/Dados' 
 import useSensor from './hooks/useSensor'
 import useClima from './hooks/useClima'
 import usePlantios from './hooks/usePlantios'
@@ -64,6 +65,7 @@ export default function App() {
                 />
               }
             />
+            <Route path="/dados" element={<Dados leitura={leitura} onSimularRisco={simularRisco} alertas={alertas} atendidos={atendidos} risco={risco} onAtender={atender} />}/>
             
           </Routes>
         </div>
