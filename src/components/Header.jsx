@@ -3,7 +3,7 @@ import { Bell } from 'lucide-react'
 import { CIDADES } from '../data/cidades'
 import logo from '../assets/Logo.png'
 
-const Header = () => {
+const Header = ({ cidade, onMudarCidade, temAlertas }) => {
   return (
     <header className="flex items-center justify-between md:justify-end">
       <div className="flex items-center gap-2 md:hidden">
