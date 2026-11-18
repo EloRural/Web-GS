@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
+import Menu from './components/Menu'
 import Home from './pages/Home'
 import useSensor from './hooks/useSensor'
 import useClima from './hooks/useClima'
 import usePlantios from './hooks/usePlantios'
+import usePerfil from './hooks/usePerfil'
 import { CIDADES } from './data/cidades'
 import { gerarAlertas, recomendarIrrigacao, nivelRisco } from './utils/regras'
 
@@ -17,6 +19,7 @@ export default function App() {
   const { leitura, simularRisco } = useSensor()
   const { clima, carregando: carregandoClima, erro: erroClima } = useClima(cidade)
   const { plantios, carregando, erro, adicionar, editar, remover } = usePlantios()
+  const { perfil, setPerfil } = usePerfil()
 
   const alertas = gerarAlertas(leitura, clima)
   const risco = nivelRisco(alertas)
@@ -41,6 +44,7 @@ export default function App() {
 
   return (
     <>
+      <Menu />
       <div className="min-h-screen md:pl-64">
         <div className="mx-auto max-w-5xl px-5 pb-28 pt-5 md:px-8 md:pb-10">
           <Header cidade={cidade} onMudarCidade={setCidade} temAlertas={alertas.length > 0} />
@@ -49,6 +53,7 @@ export default function App() {
               path="/"
               element={
                 <Home
+                  nome={perfil.nome}
                   cidade={cidade.nome}
                   clima={clima}
                   carregandoClima={carregandoClima}
