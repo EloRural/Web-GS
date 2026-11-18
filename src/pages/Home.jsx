@@ -1,7 +1,7 @@
 import CardClima from '../components/CardClima'
 import AlertaDestaque from '../components/AlertaDestaque'
 import CardPlantio from '../components/CardPlantio'
-import Recomendacao from '../components/Recomenacao'
+import Recomendacao from '../components/Recomendacao'
 
 const Home = ({ nome, cidade, clima, carregandoClima, erroClima, alertas, plantios, recomendacao }) => {
   const alerta = alertas.find((a) => a.nivel === 'alto') ?? alertas[0]
