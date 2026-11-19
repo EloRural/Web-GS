@@ -4,6 +4,7 @@ import Header from './components/Header'
 import Menu from './components/Menu'
 import Home from './pages/Home'
 import Dados from './pages/Dados' 
+import Mercado from './pages/Mercado'
 import useSensor from './hooks/useSensor'
 import useClima from './hooks/useClima'
 import usePlantios from './hooks/usePlantios'
@@ -11,7 +12,7 @@ import usePerfil from './hooks/usePerfil'
 import { CIDADES } from './data/cidades'
 import { gerarAlertas, recomendarIrrigacao, nivelRisco } from './utils/regras'
 
-export default function App() {
+const App = () => {
   const [cidade, setCidade] = useState(CIDADES[0])
   const [editando, setEditando] = useState(null)
   const [atendidos, setAtendidos] = useState([])
@@ -66,10 +67,12 @@ export default function App() {
               }
             />
             <Route path="/dados" element={<Dados leitura={leitura} onSimularRisco={simularRisco} alertas={alertas} atendidos={atendidos} risco={risco} onAtender={atender} />}/>
-            
+            <Route path="/mercado" element={<Mercado />} />
           </Routes>
         </div>
       </div>
     </>
   )
 }
+
+export default App
