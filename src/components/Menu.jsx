@@ -1,5 +1,6 @@
-import { NavLink } from 'react-router-dom'
-import { Home, BarChart3, Sprout, Store, User, Leaf } from 'lucide-react'
+import { NavLink, Link } from 'react-router-dom'
+import { Home, BarChart3, Sprout, Store, User } from 'lucide-react'
+import logo from '../assets/Logo4.png'
 
 const ITENS = [
   { para: '/', texto: 'Início', Icone: Home },
@@ -14,8 +15,9 @@ export default function Menu() {
     <>
       <aside className="fixed inset-y-0 left-0 hidden w-64 flex-col bg-mata p-5 text-white md:flex">
         <div className="flex items-center gap-2">
-          <Leaf className="text-trigo" size={28} />
-          <span className="font-display text-2xl font-bold">EloRural</span>
+          <Link to="/" className="mb-2 block rounded-xl p-3">
+            <img src={logo} alt="EloRural" className="h-9 w-auto" />
+          </Link>
         </div>
         <p className="mb-8 mt-1 text-sm text-white/60">Conectando o campo ao futuro</p>
         <nav className="flex flex-col gap-1">
@@ -25,8 +27,7 @@ export default function Menu() {
               to={para}
               end
               className={({ isActive }) =>
-                `flex items-center gap-3 rounded-xl px-4 py-3 font-medium transition-colors ${
-                  isActive ? 'bg-white text-mata' : 'text-white/75 hover:bg-white/10'
+                `flex items-center gap-3 rounded-xl px-4 py-3 font-medium transition-colors ${isActive ? 'bg-white text-mata' : 'text-white/75 hover:bg-white/10'
                 }`
               }
             >

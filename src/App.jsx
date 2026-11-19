@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
+import Footer from './components/Footer'
 import Menu from './components/Menu'
 import Home from './pages/Home'
-import Dados from './pages/Dados' 
+import Dados from './pages/Dados'
+import Plantios from './pages/Plantios'
 import Mercado from './pages/Mercado'
+import Perfil from './pages/Perfil'
 import useSensor from './hooks/useSensor'
 import useClima from './hooks/useClima'
 import usePlantios from './hooks/usePlantios'
@@ -27,6 +30,7 @@ const App = () => {
   const risco = nivelRisco(alertas)
   const chaveAlertas = alertas.map((a) => a.id).join(',')
 
+  // Quando um alerta deixa de existir, ele sai da lista de "atendidos".
   useEffect(() => {
     setAtendidos((lista) => lista.filter((id) => chaveAlertas.split(',').includes(id)))
   }, [chaveAlertas])
@@ -66,13 +70,45 @@ const App = () => {
                 />
               }
             />
-            <Route path="/dados" element={<Dados leitura={leitura} onSimularRisco={simularRisco} alertas={alertas} atendidos={atendidos} risco={risco} onAtender={atender} />}/>
+            <Route
+              path="/dados"
+              element={<Dados leitura={leitura} onSimularRisco={simularRisco} alertas={alertas} atendidos={atendidos} risco={risco} onAtender={atender} />}
+            />
+            <Route
+              path="/plantios"
+              element={
+                <Plantios
+                  editando={editando}
+                  onSalvar={salvar}
+                  onCancelar={() => setEditando(null)}
+                  plantios={plantios}
+                  carregando={carregando}
+                  erro={erro}
+                  onEditar={setEditando}
+                  onRemover={remover}
+                />
+              }
+            />
             <Route path="/mercado" element={<Mercado />} />
+            <Route
+              path="/perfil"
+              element={
+                <Perfil
+                  perfil={perfil}
+                  onSalvar={setPerfil}
+                  cidade={cidade}
+                  onMudarCidade={setCidade}
+                  totalPlantios={plantios.length}
+                  areaTotal={areaTotal}
+                  totalAtendidos={totalAtendidos}
+                />
+              }
+            />
           </Routes>
+          <Footer />
         </div>
       </div>
     </>
   )
 }
-
 export default App

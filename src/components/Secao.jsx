@@ -1,4 +1,3 @@
-// Cartão padrão. "tom" muda a cor conforme a função.
 const TONS = {
   claro: 'bg-white border border-mata/10 text-tinta',
   escuro: 'bg-mata text-white',
